@@ -1,15 +1,13 @@
 <p align="center">
 
   <a href="https://github.com/i-am-fyre/MaNGOSEvolution" target="_blank">
-    <img alt="mangos-evolution-banner" height="70" alt="Mangos Evolution Banner" src="img/logo/mangos_evolution_banner.svg"/>
+    <img alt="mangos-evolution-banner" height="150" alt="Mangos Evolution Banner" src="/img/logo/banner/mangos_evolution_banner.svg"/>
   </a>
 </p>
 <p align="center">
   <a href="https://discord.gg/CzXcBXq">
     <img src="https://img.shields.io/discord/286167585270005763?label=Discord&logo=Discord&logoColor=ffffff&style=for-the-badge" alt="Discord">
   </a>
-
-  [![Contributors](https://img.shields.io/github/contributors/i-am-fyre/MaNGOSEvolution?label=Contributors&style=for-the-badge)](#contributors-)
 </p>
  
 MaNGOS Evolution is a project aiming to provide a complete and easy-to-use tool to migrate your MaNGOS database to a new version. For example, using this tool would allow you to move your playerbase from M0 to M1, or from M0 to M1 to M2, or from M0 to M1 to M2 to M3, etc.
