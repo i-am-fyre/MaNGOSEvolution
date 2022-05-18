@@ -51,12 +51,12 @@ You can ask questions, and participate in discussions about MaNGOSEvolution in t
 
 ## Create a bug report
 
-If you observe an error or encounter a bug, please create an issue on the GitHub repository. You can use the GitHub issue tracker to [submit a bug report](https://github.com/i-am-fyre/MaNGOSEvolution/issues/new?assignees=&labels=type%3A%20bug&template=bug_report.md&title=). All bug reports are valuable and will help all MaNGOSEvolution users.
+If you observe an error or encounter a bug, please create an issue on the GitHub repository. You can use the GitHub issue tracker to [submit a bug report](https://github.com/i-am-fyre/MaNGOSEvolution/issues/new?assignees=&labels=bug&template=bug_report.md&title=%3Abug%3A+). All bug reports are valuable and will help all MaNGOSEvolution users.
 
 
 ## Submit a feature request
 
-If you want to suggest a new feature, please create an issue on the GitHub repository. You can use the Github issue tracker to [submit a feature request](https://github.com/i-am-fyre/MaNGOSEvolution/issues/new?assignees=&labels=type%3A%20feature%20request&template=feature_request.md&title=).
+If you want to suggest a new feature, please create an issue on the GitHub repository. You can use the Github issue tracker to [submit a feature request](https://github.com/i-am-fyre/MaNGOSEvolution/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%5B%3Asparkles%3A%5D+).
 
 If you find a similar feature request, feel free to leave a "thumbs up" to show support.
 
