@@ -1,10 +1,12 @@
 import os
 import time
+import glob
+import fnmatch
 import mysql.connector
 from mysql.connector import Error
 
 BACKUP_PATH = './backup/'
-
+MIGRATE_DB_PATH = './migrate/'
 
 def print_banner():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -29,6 +31,7 @@ def print_menu():
         print("  1. M0 (1.12.1) to M1 (2.4.3)")
         print("  2. M1 (2.4.3) to M2 (3.3.5a)")
         print("  3. M2 (3.3.5a) to M3 (4.3.4)")
+        print("  4. M3 (4.3.4) to M4 (5.4.8)")
         print("  q. Quit")
         print("\n")
         choice = input("Enter choice: ")
@@ -47,6 +50,11 @@ def print_menu():
             backup_db(2)
             migrate_db(2)
             break
+        elif choice == "4":
+            print_banner()
+            backup_db(3)
+            migrate_db(3)
+            break
         elif choice == "q":
             print("Bye!")
             break
@@ -55,6 +63,11 @@ def print_menu():
             print("Invalid choice!")    
 
 def backup_db(version):
+    global mysql_user
+    global mysql_pass
+    global mysql_host
+    global mysql_port
+
     mysql_user = input("Enter MySQL username [default: mangos]: ") or "mangos"
     mysql_pass = input("Enter MySQL password [default: mangos]: ") or "mangos"
     mysql_host = input("Enter MySQL host [default: 127.0.0.1]: ") or "127.0.0.1"
@@ -109,7 +122,65 @@ def backup_db(version):
         print("Unable to connect to one or more databases! Please confirm your credentials and ensure that the user is authorized to access the databases.")
 
 def migrate_db(version):
+    migrate_version = version + 1
+    print("\n")
     print("Time to migrate the DB!")
+    while True:
+        choice = input(f"Do you have an existing M{migrate_version} database? [y/n]: ")
+        if choice == "y": # This is not complete yet. Working on the 'n' selection first.
+            print(f"M{migrate_version} database exists!")
+        elif choice == "n":
+            print(f"Creating M{migrate_version} database...")
+            try:
+                os.stat(MIGRATE_DB_PATH)
+                print(f"Migration directory ({MIGRATE_DB_PATH}) already exists!")
+            except:
+                os.mkdir(MIGRATE_DB_PATH)
+                print(f"Created migration directory ({MIGRATE_DB_PATH})!")
+            
+            # Pull database files from github.
+            print("\n")
+            print("Pulling database files from github...")
+            if migrate_version == 1:
+                version_text = "one"
+            elif migrate_version == 2:
+                version_text = "two"
+            elif migrate_version == 3:
+                version_text = "three"
+            elif migrate_version == 4:
+                version_text = "four"
+            
+            os.system(f"git clone https://github.com/mangos{version_text}/database {MIGRATE_DB_PATH}m{migrate_version}db")
+
+            # Create database.
+            print("\n")
+            print("Creating character database...")
+            DATETIME = time.strftime('%Y%m%d%H%M%S') # This is used temporarily during testing.
+            new_char_db = f"character{migrate_version}_{DATETIME}" # This is used temporarily during testing.
+            # This line should be used once testing is complete:
+                # new_char_db = f"character{migrate_version}"
+
+            print(f"Database: {new_char_db}")
+
+            os.system(f"mysql -h{mysql_host} -P {mysql_port} -u {mysql_user} -p{mysql_pass} -e \"Create database {new_char_db}\"")
+
+            # Generate Character Tables.
+            for file in os.listdir(f"{MIGRATE_DB_PATH}m{migrate_version}db/Character/Setup"):
+                if file.endswith("LoadDB.sql"):
+                    file_path = os.path.join(f"{MIGRATE_DB_PATH}m{migrate_version}db/Character/Setup", file)
+                    os.system(f"mysql -h{mysql_host} -P {mysql_port} -u {mysql_user} -p{mysql_pass} {new_char_db} < {file_path}")
+                    print(f"Character tables imported.\n")
+
+
+            # Perform Character Updates.
+            print("Performing updates for character database...")
+            for file in glob.glob(f'{MIGRATE_DB_PATH}m{migrate_version}db/Character/Updates/**/*.sql', recursive=True):
+                print(f"Updating {file}...")
+                os.system(f"mysql -h{mysql_host} -P {mysql_port} -u {mysql_user} -p{mysql_pass} {new_char_db} < {file}")
+                print(f"File {file} imported!\n")
+            break
+        else:
+            print("Invalid choice!")
 
 print_banner()
 print_menu()
