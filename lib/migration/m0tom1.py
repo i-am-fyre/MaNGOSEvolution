@@ -20,3 +20,5 @@ def migrate(conn, db1, db2):
         cursor.execute('show columns from ' + i)
         for j in cursor:
             print("> " + j[0])
+
+def 
