@@ -43,7 +43,7 @@ Create a virtual environment:
 python3 -m venv .venv
 ```
 ```bash
-souce .venv/bin/activate
+source .venv/bin/activate
 ```
 MaNGOSEvolution is a Python package, so you need to install all pre-requisites.
 
