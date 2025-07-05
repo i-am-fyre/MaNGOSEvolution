@@ -58,6 +58,66 @@ MaNGOSEvolution is currently in a Work-In-Progress state. This means that it is 
 Please feel free to contribute to the project, and report any issues you may encounter.
 Any data loss is not the fault of the community or contributors. **Use at YOUR own risk!**
 
+## M0 to M1
+| Table | Differences | Status |
+| --- | --- | --- |
+| ahbot_category | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| ahbot_history | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| ahbot_price | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| ai_playerbot_names | M1 dropped race, class, purpose, priority, and in_use. | Matched - Needs to be tested. |
+| ai_playerbot_random_bots | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| auction | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| bugreport | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_action | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_aura | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_battleground_data | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_gifts | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_homebind | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_honor_cp | Table does not exist in M1. Still need to figure out where the data goes from M0 to M1. | Incomplete |
+| character_instance | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_inventory | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_pet | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_queststatus | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_reputation | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_skills | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_social | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_spell | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_spell_cooldown | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_stats | There are two new columns in MaNGOS One: spellCritPct and spellPower. Currently, this function does NOT write any data into these columns - will need to determine what the formulas are to determine these 2 values. Also, will need to assess whether any other formulas may need to be recalculated for the stats. Right now, this function only COPIES direct values. | Incomplete |
+| character_ticket | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_tutorial | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| character_whispers | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| characters | TBD | Incomplete |
+| corpse | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| creature_respawn | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| db_version | Not merging/moving this data. | N/A |
+| game_event_status | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| gameobject_respawn | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| group_instance | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| group_member | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| groups | M1 added difficulty - but shouldn't be necessary to fill in during migration. | Matched - Needs to be tested. |
+| guild | M1 added BankMoney - but shouldn't be necessary to fill in during migration. | Matched - Needs to be tested. |
+| guild_eventlog | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| guild_member | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| guild_rank | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| instance | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| instance_reset | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| item_instance | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| item_loot | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| mail | M1 dropped the body column and added the itemTextId column. | Incomplete. |
+| mail_items | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| pet_aura | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| pet_spell | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| pet_spell_cooldown | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| petition | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| petition_sign | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| pvpstats_battlegrounds | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| pvpstats_players | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| quest_tracker | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| saved_variables | M1 dropped NextMaintenanceDate. | Matched - Needs to be tested. |
+| warden_action | No changes Between M0 to M1. | Matched - Needs to be tested. |
+| world | No changes Between M0 to M1. | Matched - Needs to be tested. |
+
 # Support :computer:
 
 ## Ask a question about MaNGOSEvolution :question:

@@ -114,13 +114,23 @@ def backup_db(version):
                 os.stat(f"{BACKUP_FILE}")
                 if (os.path.getsize(f"{BACKUP_FILE}") > 0):
                     print(f"Backup of {db_x} successful!")
+
+                    # Perform Character Updates to make sure that the database is at the latest version before applying migration.
+                    print("Performing updates for character database...")
+                    for file in glob.glob(f'{MIGRATE_DB_PATH}m{version}db/Character/Updates/**/*.sql', recursive=True):
+                        print(f"Updating {file}...")
+                        os.system(f"mysql -h{mysql_host} -P {mysql_port} -u {mysql_user} -p{mysql_pass} {db_characters_name} < {file}")
+                        print(f"File {file} imported!\n")
+                    print("Character database updates complete!\n")
+
                 else:
                     print(f"Backup of {db_x} failed!")
                     os.remove(f"{BACKUP_FILE}")
             except:
                 print(f"Error backing up {db_x}!")
         db1 = db_characters_name
-        migrate_db(version, conn)
+        # migrate_db(version, conn)
+        migrate_db(version)
     else:
         print("\n")
         print("Unable to connect to one or more databases! Please confirm your credentials and ensure that the user is authorized to access the databases.")
@@ -128,7 +138,8 @@ def backup_db(version):
         exit()
 
 
-def migrate_db(version, conn):
+# def migrate_db(version, conn):
+def migrate_db(version):
     global db2
     migrate_version = version + 1
     print("\n")
@@ -164,7 +175,8 @@ def migrate_db(version, conn):
             print("\n")
             print("Creating character database...")
             DATETIME = time.strftime('%Y%m%d%H%M%S') # This is used temporarily during testing.
-            new_char_db = f"character{migrate_version}_{DATETIME}" # This is used temporarily during testing.
+            # new_char_db = f"character{migrate_version}_{DATETIME}" # This is used temporarily during testing.
+            new_char_db = f"character{migrate_version}_cosmicray"
             # This line should be used once testing is complete:
                 # new_char_db = f"character{migrate_version}"
 
@@ -179,7 +191,6 @@ def migrate_db(version, conn):
                     os.system(f"mysql -h{mysql_host} -P {mysql_port} -u {mysql_user} -p{mysql_pass} {new_char_db} < {file_path}")
                     print(f"Character tables imported.\n")
 
-
             # Perform Character Updates.
             print("Performing updates for character database...")
             for file in glob.glob(f'{MIGRATE_DB_PATH}m{migrate_version}db/Character/Updates/**/*.sql', recursive=True):
@@ -188,9 +199,23 @@ def migrate_db(version, conn):
                 print(f"File {file} imported!\n")
             print("Character database updates complete!\n")
 
-            db2 = new_char_db
+            source_db = mysql.connector.connect(
+                host=mysql_host,
+                port=mysql_port,
+                user=mysql_user,
+                password=mysql_pass,
+                database=db1
+            )
 
-            m0migrate(conn, db1, db2)
+            new_db = mysql.connector.connect(
+                host=mysql_host,
+                port=mysql_port,
+                user=mysql_user,
+                password=mysql_pass,
+                database=new_char_db
+            )
+
+            m0migrate(source_db, new_db)
 
             break
         else:
