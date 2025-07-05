@@ -175,8 +175,7 @@ def migrate_db(version):
             print("\n")
             print("Creating character database...")
             DATETIME = time.strftime('%Y%m%d%H%M%S') # This is used temporarily during testing.
-            # new_char_db = f"character{migrate_version}_{DATETIME}" # This is used temporarily during testing.
-            new_char_db = f"character{migrate_version}_cosmicray"
+            new_char_db = f"character{migrate_version}_{DATETIME}" # This is used temporarily during testing.
             # This line should be used once testing is complete:
                 # new_char_db = f"character{migrate_version}"
 
