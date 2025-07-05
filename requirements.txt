@@ -1,5 +1,5 @@
 mysql==0.0.3
-mysql-connector-python==8.0.29
+mysql-connector-python==9.1.0
 mysqlclient==2.1.0
 protobuf==4.21.6
 tqdm==4.66.1
